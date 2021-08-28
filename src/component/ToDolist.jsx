@@ -3,6 +3,8 @@ import './style.css';
 const ToDolist = () => {
     const [inputItem,setInputItem]= useState('');
     const [Item,setItem]= useState([]);
+    const [editBtn,setEditBtn]= useState(true);
+    const [isEditItem, setIsEditItem]= useState(null)
 
     const inputEvent=(event)=>{
         setInputItem(event.target.value);
@@ -11,21 +13,42 @@ const ToDolist = () => {
         if(!inputItem){
             alert('Please Enter the item.')
 
-        }else{
-            
-            setItem([...Item,inputItem]);
+        }else if (inputItem && !editBtn) {
+            setItem(
+                Item.map((elem)=>{
+                    if (elem.id===isEditItem){
+                        return {...elem,name:inputItem}
+                    }
+                    return elem;
+                })
+            )
+            setInputItem('');
+            setEditBtn(true);
+            setIsEditItem(null);
+        }
+        else{
+            const allInputData={id:new Date().getTime().toString(), name:inputItem}
+            setItem([...Item,allInputData]);
             setInputItem('')
         }
     }
 
-    const deleteItem=(id)=>{
-        const updatedItem=Item.filter((elm,ind)=>{
-            return ind!==id;
+    const deleteItem=(index)=>{
+        const updatedItem=Item.filter((elem)=>{
+            return elem.id!==index;
         })
         setItem(updatedItem);
     } 
     const DeleteAll=()=>{
         setItem([]);
+    }
+    const editItem=(id)=>{
+        let newEditItem=Item.find((elem)=>{
+            return elem.id===id
+        })
+        setInputItem(newEditItem.name);
+        setEditBtn(false);
+        setIsEditItem(id);
     }
 
     return (
@@ -35,18 +58,19 @@ const ToDolist = () => {
                 <h1> <i className="far fa-clipboard "></i> ToDo List</h1> 
                 <div className='input_div'>
                 <input placeholder='✍️ Add the item' name='item' value={inputItem} onChange={inputEvent} />
-                <i className="fas fa-plus" onClick={AddItem}></i> 
+                {editBtn?<i className="fas fa-plus" onClick={AddItem}></i> :
+                <i className="far fa-edit edit" onClick={AddItem}></i> }
                 </div>
                        {
-                            Item.map((val,ind)=>{
+                            Item.map((elem)=>{
                                 return(
 
                                  <div className='list_items'>
-                                    <div className='item' key={ind} id={ind}>
-                                        <p>{ind+1}. {val} </p>  
+                                    <div className='item'  id={elem.id}>
+                                        <p> {elem.name} </p>  
                                         <div className='icons'>
-                                        <i class="far fa-edit edit"></i>
-                                        <i className="far fa-trash-alt delete" onClick={()=>deleteItem(ind)}></i>
+                                        <i class="far fa-edit edit" onClick={()=>editItem(elem.id)}></i>
+                                        <i className="far fa-trash-alt delete" onClick={()=>deleteItem(elem.id)}></i>
                                         </div>
                                     </div>
                                 </div>
