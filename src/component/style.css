@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main_div{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(163, 163, 228);
+}
+
+.main_div .center_div{
+    min-height: 400px;
+    width: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 4px;
+    margin: 2rem 0;
+    
+    
+}
+
+.main_div .center_div h1{
+    margin:2rem 0;
+
+}
+.main_div .center_div h1 .far{
+    color:rgb(241, 238, 31);
+}
+.main_div .center_div .input_div{
+    
+    width: 80vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 10px;
+    border:2px solid rgb(163, 163, 228);
+    border-radius: 25px;
+    background-color: white;
+
+}
+.main_div .center_div .input_div input{
+    height: 30px;
+    width:100vh;
+    outline: none;
+    padding:4px 6px;
+    border: none;
+    border-radius: 25px;
+
+}
+
+.main_div .center_div .input_div i:hover{
+    cursor: pointer;
+    color:green;
+}
+.main_div .center_div .input_div:hover{
+    border:2px solid rgba(42, 219, 18, 0.5);
+}
+
+.main_div .center_div .list_items{
+    min-height: 30px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 2px 10px;
+    margin-top: 1rem;
+    background-color:white;
+    border-radius: 10px;
+}
+
+.main_div .center_div .item{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 5px;
+}
+.main_div .center_div .item .far{
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.main_div .center_div .item .delete:hover{
+    color: rgb(207, 16, 16);
+}
+.main_div .center_div .item .edit:hover{
+    color: rgb(16, 207, 25);
+}
+
+.main_div .center_div button{
+    height: 30px;
+    width: 90px;
+    color:red;
+    border-radius: 5px;
+    border: 2px solid red;
+    margin: 2rem 0;
+}
+.main_div .center_div button:hover{
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+@media screen and  (max-width:750px){
+    .main_div .center_div{
+        width: 100vh;
+    }
+    .main_div .center_div .input_div input{
+        width:40vh;
+    }
+}
